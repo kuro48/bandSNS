@@ -7,6 +7,8 @@
 <body>
   <div class="container">
     <div class="navigation">
+      <div class="menubox">
+      </div>
       <div class="icon">
             <a href="/">アイコン</a>
       </div>
@@ -23,8 +25,8 @@
     </div>
   </div>
   <% if !current_user.nil? %>
-    <div>
-      <form action="/newpost" method="post">
+    <div class="">
+      <form action="/newpost" method="post" class="">
         <div>
           <div>
             <input name="text" type="text" placeholder="今日は練習した？">
@@ -44,7 +46,11 @@
   * {
     margin: 0;
     padding: 0;
-    font-family: 'Playfair Display SC', serif;
+    font-family: "東青梅ゴシック";
+  }
+
+  a {
+    text-decoration: none;
   }
 
   body{
@@ -53,36 +59,40 @@
 
   .container{
     max-width: 1190px;
-    text-align: center;
-    height: 60px;
-    background-color: #ff4500;
+    margin: auto;
+    height: 100%;
   }
 
   .navigation {
     height: 100%;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
   }
 
   .icon{
     width: 35px;
     height: 35px;
     text-align: center;
-    margin: 0 auto;
   }
 
   .acount{
     float: right;
   }
 
-.user ul{
+  .user ul{
   overflow: hidden;
-}
+  }
 
   .user li{
     list-style: none;
     margin: 0px;
     float: left;
     margin: 10px;
+  }
+
+  .signin li{
+    list-style: none;
   }
 
   </style>
