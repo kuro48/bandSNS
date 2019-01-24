@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Bandy</title>
+</head>
+<body>
+  <div class="container">
+    <div class="navigation">
+      <div class="icon">
+            <a href="/">アイコン</a>
+      </div>
+      <div class="acount">
+        <ul class="user">
+          <% if !current_user.nil? %>
+            <li class="user-icon"><a href="/<%= current_user.username %>"><%= current_user.nickname %></a></li>
+            <li class="signout-btn"><a href="/signout">ログアウト</a></li>
+          <% else %>
+            <li class="signin-btn"><a href="/signin">ログイン</a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <% if !current_user.nil? %>
+    <div>
+      <form action="/newpost" method="post">
+        <div>
+          <div>
+            <input name="text" type="text" placeholder="今日は練習した？">
+          </div>
+          <div>
+            <input type="submit" value="投稿">
+          </div>
+        </div>
+        <div>
+      </form>
+    </div>
+  <% end %>
+  <div>
+  </div>
+  <%= yield %>
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Playfair Display SC', serif;
+  }
+
+  body{
+    width: 100%;
+  }
+
+  .container{
+    max-width: 1190px;
+    text-align: center;
+    height: 60px;
+    background-color: #ff4500;
+  }
+
+  .navigation {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .icon{
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .acount{
+    float: right;
+  }
+
+.user ul{
+  overflow: hidden;
+}
+
+  .user li{
+    list-style: none;
+    margin: 0px;
+    float: left;
+    margin: 10px;
+  }
+
+  </style>
+</body>
+</html>

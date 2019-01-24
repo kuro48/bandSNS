@@ -1,0 +1,7 @@
+<div>
+  <form action="/<%= current_user.username %>/useredit" method="post">
+    <input name="discription" type="text" placeholder="<%= current_user.discription %>">
+    <a href="/<%= current_user.username %>">キャンセル</a>
+    <input type="submit" value="変更を保存">
+  </form>
+</div>

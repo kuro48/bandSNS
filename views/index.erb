@@ -1,0 +1,19 @@
+<% if !current_user.nil? %>
+  <div>
+    <% @posts.each do |post| %>
+      <div>
+        <div>
+          <div>
+            <strong><a href="/<%= post.user.username %>"><%= post.user.nickname %></a></strong>
+          </div>
+          <div>
+            <b><%= post.user.username %></b>
+          </div>
+        </div>
+        <div></div>
+              <p><%= post.text %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
