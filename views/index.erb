@@ -17,17 +17,22 @@
       </div>
       <div class="post-scroll">
         <% @posts.each do |post| %>
-          <a href="/modal/post" class="modal-post-open">
-            <div class="post">
-              <div>
-                <strong ><a href="/<%= post.user.username %>" class="post-nickname"><%= post.user.nickname %></a></strong>
-              </div>
-              <div>
-                <b class="post-username"><%= post.user.username %></b>
-              </div>
+          <div class="post">
+            <div>
+              <b>
+                <a href="/<%= post.user.username %>" class="post-nickname">
+                  <%= post.user.nickname %>
+                </a>
+              </b>
+            </div>
+            <div>
+              <b class="post-username"><%= post.user.username %></b>
+            </div>
+            <a href="#modal-post-<%= post.id %>" class="modal-post-open">
               <div>
                 <p class="post-text"><%= post.text %></p>
               </div>
+            </a>
               <% if post.user_id == current_user.id %>
                 <div>
                   <form action="/post/<%= post.id %>/delete" method="post">
@@ -35,8 +40,7 @@
                   </form>
                 </div>
               <% end %>
-            </div>
-          </a>
+          </div>
         <% end %>
       </div>
     </div>
@@ -44,39 +48,45 @@
     </div>
   </div>
   <% @posts.each do |post| %>
-    <div class="modal-background">
-      <div class="modal-post">
-        <div >
-          <strong><a href="/<%= post.user.username %>" class="modal-post-nick-name"><%= post.user.nickname %></a></strong>
-        </div>
-        <div>
-          <b class="modal-post-username"><%= post.user.username %></b>
-        </div>
-        <div>
-          <p class="modal-post-text"><%= post.text %></p>
-        </div>
-        <% if post.user_id == current_user.id %>
+    <div class="modal" id="modal-post-<%= post.id %>">
+      <div class="modal-background">
+        <div class="modal-post">
           <div>
-            <form action="/post/<%= post.id %>/delete" method="post">
-              <input type="submit" value="削除">
-            </form>
+            <strong><a href="/<%= post.user.username %>" class="modal-post-nick-name"><%= post.user.nickname %></a></strong>
           </div>
-        <% end %>
+          <div>
+            <b class="modal-post-username"><%= post.user.username %></b>
+          </div>
+          <div>
+            <p class="post-text"><%= post.text %></p>
+          </div>
+          <% if post.user_id == current_user.id %>
+            <div>
+              <form action="/post/<%= post.id %>/delete" method="post">
+                <input type="submit" value="削除">
+              </form>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   <% end %>
 <% end %>
 <script>
 $(function () {
-$(".modal-post-open").click(function(){
-
+  $(".modal-post-open").click(function(){
     var navClass = $(this).attr("class"),
         href = $(this).attr("href");
 
         $(href).fadeIn();
     $(this).addClass("open");
     return false;
-});
+  });
+  $(".modal-background").click(function(){
+    $(this).parents(".modal").fadeOut();
+    $(".modal-post-open").removeClass("open");
+    return false;
+  });
 });
 
 </script>
