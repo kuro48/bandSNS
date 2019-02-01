@@ -3,81 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <title>Bandy</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js
+"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="navigation">
-      <div class="menubox">
-      </div>
-      <div class="icon">
-            <a href="/">アイコン</a>
-      </div>
-      <div class="acount">
-        <ul class="user">
-          <% if !current_user.nil? %>
-            <li class="user-icon"><a href="/<%= current_user.username %>"><%= current_user.nickname %></a></li>
-            <li class="signout-btn"><a href="/signout">ログアウト</a></li>
-          <% else %>
-            <li class="signin-btn"><a href="/signin">ログイン</a></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <% if !current_user.nil? %>
-    <div class="">
-      <form action="/newpost" method="post" class="">
-        <div>
-          <div>
-            <input name="text" type="text" placeholder="今日は練習した？">
-          </div>
-          <div>
-            <input type="submit" value="投稿">
-          </div>
+ <% if !current_user.nil? %>
+ <div class="container">
+    <div class="navigation-bar">
+      <div class="navigation">
+        <div class="menubox">
         </div>
-        <div>
-      </form>
+        <div class="icon">
+              <a href="/">アイコン</a>
+        </div>
+        <div class="acount">
+          <ul class="user">
+              <li class="user-icon"><a href="/<%= current_user.username %>"><%= current_user.nickname %></a></li>
+              <li class="signout-btn"><a href="/signout">ログアウト</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  <% end %>
-  <div>
   </div>
-  <%= yield %>
+<% end %>
+<%= yield %>
   <style>
+
   * {
     margin: 0;
     padding: 0;
     font-family: "東青梅ゴシック";
+    height: 100%;
+    color: #4a4a4a;
+  }
+
+  div{
+    height: auto;
   }
 
   a {
     text-decoration: none;
   }
 
+  input {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+  }
+
   body{
     width: 100%;
+    height:100%;
+    position: relative;
   }
 
   .container{
+    width: 100%;
+    height: 46px;
+    position: fixed;
+    top: 0;
+  }
+
+  .navigation-bar{
     max-width: 1190px;
     margin: auto;
     height: 100%;
   }
 
   .navigation {
+    width: 100%;
     height: 100%;
     overflow: hidden;
     display: flex;
     justify-content: space-between;
+    background-color: #fff;
   }
 
   .icon{
     width: 35px;
     height: 35px;
     text-align: center;
-  }
-
-  .acount{
-    float: right;
   }
 
   .user ul{
@@ -91,10 +98,148 @@
     margin: 10px;
   }
 
+  .signin-page{
+    height: 100%;
+  }
+
+  .signin-box{
+    position: relative;
+  }
+
+  .signin{
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 300px;
+    text-align: center;
+    position: relative;
+  }
+
+  .signin-form{
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  @media ( min-width: 700px ){
+    .signin-page{
+      width: 100%;
+      display: flex;
+    }
+
+    .signin-image,
+    .signin-box{
+      flex: 1;
+    }
+  }
   .signin li{
     list-style: none;
   }
 
+  .login-btn {
+  display: inline-block;
+  max-width: 150px;
+  text-align: left;
+  border: 2px solid #ffb23b;
+  font-size: 14px;
+  color: #ffb23b;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 36px;
+  border-radius: 30px;
+  transition: .4s;
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.login-btn:hover {
+  background-color: #ffb23b;
+  border-color: #ffbf5d;
+  color: #fff;
+}
+
+.signup-btn {
+  display: inline-block;
+  max-width: 150px;
+  text-align: left;
+  border: 2px solid #16c4fd;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 30px;
+  transition: .4s;
+  background-color: #16c4fd;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.signup-btn:hover {
+  background-color: #02A6D9;
+}
+
+.email-form,
+.password-form{
+  width: 250px;
+  border-bottom: 2px solid #ffb23b;
+  outline: none;
+  padding: 20px 0px 0px 3px;
+  text-align: left;
+  margin: 10px;
+}
+
+@media (min-width: 700px){
+  .home-page{
+    display: flex;
+  }
+
+  .home-right,
+  .home-left{
+    flex: 1;
+  }
+
+  .home-main{
+    flex: 2;
+  }
+
+}
+
+.home-page{
+  margin-top: 46px;
+}
+
+.home-main{
+  align-self: stretch;
+}
+
+.modal-background{
+  top: 0;
+  left: 0;
+  display:none;
+  background-color: #000;
+  opacity: 0.55;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.modal-post{
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%,-50% );
+  width: 300px;
+  height: 400px;
+
+}
+
   </style>
+
 </body>
 </html>

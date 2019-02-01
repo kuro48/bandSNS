@@ -21,10 +21,11 @@ end
 get '/' do
     if current_user.nil?
         @posts = Post.none
+        erb :sign_in
     else
         @posts = Post.order("id DESC")
+        erb :index
     end
-    erb :index
 end
 
 get '/signup' do
@@ -92,3 +93,13 @@ post '/:newpost' do
     current_user.posts.create(text: params[:text])
     redirect '/'
 end
+
+post '/post/:id/delete' do
+    post = Post.find(params[:id])
+    if post.user_id == current_user.id
+    post.destroy
+    end
+    redirect '/'
+end
+
+get

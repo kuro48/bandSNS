@@ -1,15 +1,20 @@
-<div class="signin">
-  <li>ログイン！</li>
-  <form action="/signin" method="post">
-    <div>
-      <div>
-        <input name="email" placeholder="メールアドレスを入力">
-        <input name="password" type="password" placeholder="パスワードを入力">
-      </div>
-      <div>
-        <input type="submit" value="ログイン">
+<div class="signin-page">
+    <div class="signin-image">
+    </div>
+    <div class="signin-box">
+      <div class="signin">
+        <form action="/signin" method="post" class="signin-form">
+          <div>
+            <div class="input-place">
+              <input name="email" placeholder="メールアドレスを入力" class="email-form">
+              <input name="password" type="password" placeholder="パスワードを入力" class="password-form">
+            </div>
+            <div>
+              <input type="submit" value="ログイン" class="login-btn">
+            </div>
+          </div>
+          <li><a href="/signup" class="signup-btn">アカウント作成</a></li>
+        </form>
       </div>
     </div>
-  </form>
-  <li><a href="/signup">アカウント作成</a></li>
-</div>
+  </div>

@@ -9,7 +9,7 @@
     <a href="/<%= current_user.username %>/useredit">プロフィールを編集する</a>
   </div>
   <div>
-    <% @posts.each do |post| %>
+  <% @posts.each do |post| %>
     <div>
       <div>
         <div>
@@ -19,7 +19,7 @@
           <b><%= post.user.username %></b>
         </div>
       </div>
-      <div></div>
+      <div>
             <p><%= post.text %></p>
       </div>
     </div>

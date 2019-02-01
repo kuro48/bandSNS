@@ -1,19 +1,82 @@
 <% if !current_user.nil? %>
-  <div>
-    <% @posts.each do |post| %>
-      <div>
-        <div>
+  <div class="home-page">
+    <div class="home-left">
+    </div>
+    <div class="home-main">
+      <div class="newpost-box">
+        <form action="/newpost" method="post" class="">
           <div>
-            <strong><a href="/<%= post.user.username %>"><%= post.user.nickname %></a></strong>
+            <div>
+              <input name="text" type="text" placeholder="今日は練習した？">
+            </div>
+            <div>
+              <input type="submit" value="投稿">
+            </div>
           </div>
-          <div>
-            <b><%= post.user.username %></b>
-          </div>
-        </div>
-        <div></div>
-              <p><%= post.text %></p>
-        </div>
+        </form>
       </div>
-    <% end %>
+      <div class="post-scroll">
+        <% @posts.each do |post| %>
+          <a href="/modal/post" class="modal-post-open">
+            <div class="post">
+              <div>
+                <strong ><a href="/<%= post.user.username %>" class="post-nickname"><%= post.user.nickname %></a></strong>
+              </div>
+              <div>
+                <b class="post-username"><%= post.user.username %></b>
+              </div>
+              <div>
+                <p class="post-text"><%= post.text %></p>
+              </div>
+              <% if post.user_id == current_user.id %>
+                <div>
+                  <form action="/post/<%= post.id %>/delete" method="post">
+                    <input type="submit" value="削除">
+                  </form>
+                </div>
+              <% end %>
+            </div>
+          </a>
+        <% end %>
+      </div>
+    </div>
+    <div class="home-right">
+    </div>
   </div>
+  <% @posts.each do |post| %>
+    <div class="modal-background">
+      <div class="modal-post">
+        <div >
+          <strong><a href="/<%= post.user.username %>" class="modal-post-nick-name"><%= post.user.nickname %></a></strong>
+        </div>
+        <div>
+          <b class="modal-post-username"><%= post.user.username %></b>
+        </div>
+        <div>
+          <p class="modal-post-text"><%= post.text %></p>
+        </div>
+        <% if post.user_id == current_user.id %>
+          <div>
+            <form action="/post/<%= post.id %>/delete" method="post">
+              <input type="submit" value="削除">
+            </form>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
+<script>
+$(function () {
+$(".modal-post-open").click(function(){
+
+    var navClass = $(this).attr("class"),
+        href = $(this).attr("href");
+
+        $(href).fadeIn();
+    $(this).addClass("open");
+    return false;
+});
+});
+
+</script>
