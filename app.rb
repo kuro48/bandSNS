@@ -9,6 +9,7 @@ require 'pry'
 require './models'
 
 require 'bcrypt'
+# require "./show_table_action"
 
 enable :sessions
 
@@ -102,4 +103,6 @@ post '/post/:id/delete' do
     redirect '/'
 end
 
-get
+get '/modal' do
+    erb :modal
+end

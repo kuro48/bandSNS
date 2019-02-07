@@ -1,0 +1,22 @@
+<div class="modal" id="modal-post-<%= post.id %>">
+  <div class="modal-background">
+    <div class="modal-post">
+      <div>
+        <strong><a href="/<%= post.user.username %>" class="modal-post-nick-name"><%= post.user.nickname %></a></strong>
+        </div>
+        <div>
+          <b class="modal-post-username"><%= post.user.username %></b>
+        </div>
+        <div>
+          <p class="post-text"><%= post.text %></p>
+        </div>
+          <% if post.user_id == current_user.id %>
+            <div>
+              <form action="/post/<%= post.id %>/delete" method="post">
+                <input type="submit" value="削除">
+              </form>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>

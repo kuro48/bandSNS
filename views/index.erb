@@ -4,8 +4,8 @@
     </div>
     <div class="home-main">
       <div class="newpost-box">
-        <form action="/newpost" method="post" class="">
-          <div>
+        <form action="/newpost" method="post">
+          <div class="newpost">
             <div>
               <input name="text" type="text" placeholder="今日は練習した？">
             </div>
@@ -18,17 +18,19 @@
       <div class="post-scroll">
         <% @posts.each do |post| %>
           <div class="post">
-            <div>
-              <b>
-                <a href="/<%= post.user.username %>" class="post-nickname">
-                  <%= post.user.nickname %>
-                </a>
-              </b>
+            <div class="post-user">
+              <div class="post-nickname">
+                <b>
+                  <a href="/<%= post.user.username %>">
+                    <%= post.user.nickname %>
+                  </a>
+                </b>
+              </div>
+              <div>
+                <b class="post-username">@<%= post.user.username %></b>
+              </div>
             </div>
-            <div>
-              <b class="post-username"><%= post.user.username %></b>
-            </div>
-            <a href="#modal-post-<%= post.id %>" class="modal-post-open">
+            <a id="modal-post-open" class="modal-post-open">
               <div>
                 <p class="post-text"><%= post.text %></p>
               </div>
@@ -47,46 +49,30 @@
     <div class="home-right">
     </div>
   </div>
-  <% @posts.each do |post| %>
-    <div class="modal" id="modal-post-<%= post.id %>">
-      <div class="modal-background">
-        <div class="modal-post">
-          <div>
-            <strong><a href="/<%= post.user.username %>" class="modal-post-nick-name"><%= post.user.nickname %></a></strong>
-          </div>
-          <div>
-            <b class="modal-post-username"><%= post.user.username %></b>
-          </div>
-          <div>
-            <p class="post-text"><%= post.text %></p>
-          </div>
-          <% if post.user_id == current_user.id %>
-            <div>
-              <form action="/post/<%= post.id %>/delete" method="post">
-                <input type="submit" value="削除">
-              </form>
-            </div>
-          <% end %>
-        </div>
-      </div>
+    <div class="modal" id="modal-post">
     </div>
-  <% end %>
 <% end %>
 <script>
-$(function () {
-  $(".modal-post-open").click(function(){
-    var navClass = $(this).attr("class"),
-        href = $(this).attr("href");
-
-        $(href).fadeIn();
-    $(this).addClass("open");
-    return false;
+$(function(){
+  $("#modal-post-open").on('click', function(){
+    $.ajax({
+      url: '/modal',
+      type: 'GET',
+      success: function( data ){
+        $("#modal-post").html(data);
+        console.log(data);
+          var navClass = $(this).attr("class"),
+              href = $(this).attr("href");
+          $(href).fadeIn();
+          $(href).html();
+          $(this).addClass("open");
+      }
+    });
   });
   $(".modal-background").click(function(){
-    $(this).parents(".modal").fadeOut();
-    $(".modal-post-open").removeClass("open");
-    return false;
+            $(this).parents(".modal").fadeOut();
+              $(".modal-post-open").removeClass("open");
+                  return false;
   });
 });
-
 </script>
