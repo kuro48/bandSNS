@@ -27,12 +27,16 @@
                 </b>
               </div>
               <div>
-                <b class="post-username">@<%= post.user.username %></b>
+                <b class="post-username">
+                  @<%= post.user.username %>
+                </b>
               </div>
             </div>
-            <a id="modal-post-open" class="modal-post-open">
+            <a id="mordal-post-open" class="mordal-post-open">
               <div>
-                <p class="post-text"><%= post.text %></p>
+                <p class="post-text">
+                  <%= post.text %>
+                </p>
               </div>
             </a>
               <% if post.user_id == current_user.id %>
@@ -43,36 +47,124 @@
                 </div>
               <% end %>
           </div>
+          <div class="mordal" id="mordal-post">
+          </div>
         <% end %>
       </div>
     </div>
     <div class="home-right">
     </div>
   </div>
-    <div class="modal" id="modal-post">
-    </div>
 <% end %>
 <script>
-$(function(){
-  $("#modal-post-open").on('click', function(){
-    $.ajax({
-      url: '/modal',
-      type: 'GET',
-      success: function( data ){
-        $("#modal-post").html(data);
-        console.log(data);
+  $(function(){
+    $("#mordal-post-open").click(function(){
+      $.ajax({
+        url: '/mordal',
+        type: 'GET',
+        success: function( data ){
+          $("#mordal-post").html(data);
+          console.log(data);
           var navClass = $(this).attr("class"),
               href = $(this).attr("href");
           $(href).fadeIn();
           $(href).html();
           $(this).addClass("open");
-      }
+        }
+      });
+    });
+    $(".mordal-background").click(function(){
+      $(this).parents(".mordal").fadeOut();
+      $(".mordal-post-open").removeClass("open");
+      return false;
     });
   });
-  $(".modal-background").click(function(){
-            $(this).parents(".modal").fadeOut();
-              $(".modal-post-open").removeClass("open");
-                  return false;
-  });
-});
 </script>
+
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      font-family: "東青梅ゴシック";
+      height: 100%;
+      color: #4a4a4a;
+  }
+
+  div {
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  @media (min-width: 700px){
+    .home-page {
+      display: flex;
+    }
+
+    .home-right,
+    .home-left {
+      flex: 1;
+    }
+
+    .home-main {
+      flex: 2;
+    }
+  }
+
+  .home-page {
+    margin-top: 46px;
+    height: 100%;
+  }
+
+  .home-main {
+    align-self: stretch;
+    position: relative;
+  }
+
+  .mordal {
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .newpost-box {
+    height: 70px;
+  }
+
+  .newpost {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100%;
+  }
+
+  .post-user {
+    height: 30px;
+  }
+
+  .post-nickname {
+    overflow: hidden;
+  }
+
+  .post-username {
+    float: left;
+  }
+</style>

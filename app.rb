@@ -103,6 +103,10 @@ post '/post/:id/delete' do
     redirect '/'
 end
 
-get '/modal' do
-    erb :modal
+get '/mordal' do
+    erb :mordal, :layout => false
+end
+
+get '/home' do
+    erb :aaa, :user_page => nil
 end

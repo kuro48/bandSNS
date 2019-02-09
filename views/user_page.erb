@@ -1,28 +1,53 @@
 <div>
   <div>
-    <li><%= current_user.nickname %></li>
+    <li>
+      <%= current_user.nickname %>
+    </li>
     <ul>
       <% if !current_user.discription.nil? %>
-        <li><%= current_user.discription %></li>
+        <li>
+          <%= current_user.discription %>
+        </li>
       <% end %>
     </ul>
-    <a href="/<%= current_user.username %>/useredit">プロフィールを編集する</a>
+    <a href="/<%= current_user.username %>/useredit">
+      プロフィールを編集する
+    </a>
   </div>
-  <div>
-  <% @posts.each do |post| %>
-    <div>
-      <div>
-        <div>
-          <strong><a href="/<%= post.user.username %>"><%= post.user.nickname %></a></strong>
+  <div class="post-scroll">
+    <% @posts.each do |post| %>
+      <div class="post">
+        <div class="post-user">
+          <div class="post-nickname">
+            <b>
+              <a href="/<%= post.user.username %>">
+                <%= post.user.nickname %>
+              </a>
+            </b>
+          </div>
+          <div>
+            <b class="post-username">
+              @<%= post.user.username %>
+            </b>
+          </div>
         </div>
-        <div>
-          <b><%= post.user.username %></b>
-        </div>
+        <a id="mordal-post-open" class="mordal-post-open">
+          <div>
+            <p class="post-text">
+              <%= post.text %>
+            </p>
+          </div>
+        </a>
+          <% if post.user_id == current_user.id %>
+            <div>
+              <form action="/post/<%= post.id %>/delete" method="post">
+                <input type="submit" value="削除">
+              </form>
+            </div>
+          <% end %>
       </div>
-      <div>
-            <p><%= post.text %></p>
+      <div class="mordal" id="mordal-post">
       </div>
-    </div>
-  <% end %>
+    <% end %>
   </div>
 </div>

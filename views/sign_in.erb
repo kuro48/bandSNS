@@ -17,4 +17,133 @@
         </form>
       </div>
     </div>
-  </div>
+</div>
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      font-family: "東青梅ゴシック";
+      height: 100%;
+      color: #4a4a4a;
+    }
+
+  div {
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .signin-page {
+    height: 100%;
+  }
+
+  .signin-box {
+    position: relative;
+  }
+
+  .signin {
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 300px;
+    text-align: center;
+    position: relative;
+  }
+
+  .signin-form {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  @media(min-width: 700px) {
+    .signin-page {
+      width: 100%;
+      display: flex;
+    }
+
+    .signin-image,
+    .signin-box {
+      flex: 1;
+    }
+  }
+
+  .signin li {
+    list-style: none;
+  }
+
+  .login-btn {
+    display: inline-block;
+    max-width: 150px;
+    text-align: left;
+    border: 2px solid #ffb23b;
+    font-size: 14px;
+    color: #ffb23b;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 36px;
+    border-radius: 30px;
+    transition: .4s;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .login-btn:hover {
+    background-color: #ffb23b;
+    border-color: #ffbf5d;
+    color: #fff;
+  }
+
+  .signup-btn {
+    display: inline-block;
+    max-width: 150px;
+    text-align: left;
+    border: 2px solid #16c4fd;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: .4s;
+    background-color: #16c4fd;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .signup-btn:hover {
+    background-color: #02A6D9;
+  }
+
+  .email-form,
+  .password-form{
+    width: 250px;
+    border-bottom: 2px solid #ffb23b;
+    outline: none;
+    padding: 20px 0px 0px 3px;
+    text-align: left;
+    margin: 10px;
+  }
+</style>
