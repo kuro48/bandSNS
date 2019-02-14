@@ -7,7 +7,7 @@
         <form action="/newpost" method="post">
           <div class="newpost">
             <div>
-              <input name="text" type="text" placeholder="今日は練習した？">
+              <input name="text" type="text" placeholder="今日は練習した？" class="new-form">
             </div>
             <div>
               <input type="submit" value="投稿">
@@ -21,9 +21,8 @@
             <div class="post-user">
               <div class="post-nickname">
                 <b>
-                  <a href="/<%= post.user.username %>">
+                  <a href="/users/<%= post.user.username %>">
                     <%= post.user.nickname %>
-                  </a>
                 </b>
               </div>
               <div>
@@ -32,7 +31,7 @@
                 </b>
               </div>
             </div>
-            <a id="mordal-post-open" class="mordal-post-open">
+            <a class="mordal-post-open" data-id="<%= post.id %>">
               <div>
                 <p class="post-text">
                   <%= post.text %>
@@ -47,36 +46,33 @@
                 </div>
               <% end %>
           </div>
-          <div class="mordal" id="mordal-post">
-          </div>
         <% end %>
       </div>
     </div>
     <div class="home-right">
     </div>
   </div>
+  <div class="mordal">
+  </div>
 <% end %>
 <script>
   $(function(){
-    $("#mordal-post-open").click(function(){
+    $(".mordal-post-open").click(function(){
+      var postId = $(this).data('id');
       $.ajax({
         url: '/mordal',
         type: 'GET',
+        data: {
+          id: postId
+        },
         success: function( data ){
-          $("#mordal-post").html(data);
-          console.log(data);
-          var navClass = $(this).attr("class"),
-              href = $(this).attr("href");
-          $(href).fadeIn();
-          $(href).html();
-          $(this).addClass("open");
+          $(".mordal").html(data).css('display', 'block');
         }
       });
     });
-    $(".mordal-background").click(function(){
-      $(this).parents(".mordal").fadeOut();
-      $(".mordal-post-open").removeClass("open");
-      return false;
+
+    $(document).on("click", ".mordal-background", function(){
+      $(".mordal").css('display', 'none')
     });
   });
 </script>
@@ -129,11 +125,13 @@
   .home-page {
     margin-top: 46px;
     height: 100%;
+    background-color: #e6ecef;
   }
 
   .home-main {
     align-self: stretch;
     position: relative;
+    background-color: #fff;
   }
 
   .mordal {
@@ -154,7 +152,10 @@
     left: 50%;
     transform: translate(-50%);
     width: 100%;
+    border-bottom: 1px solid rgba(74,74,74);
+    height: 66px;
   }
+
 
   .post-user {
     height: 30px;

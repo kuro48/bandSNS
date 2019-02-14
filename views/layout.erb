@@ -19,7 +19,7 @@
           <div class="acount">
             <ul class="user">
               <li class="user-icon">
-                <a href="/<%= current_user.username %>">
+                <a href="/users/<%= current_user.username %>">
                   <%= current_user.nickname %>
                 </a>
               </li>
@@ -72,6 +72,8 @@
     height: 46px;
     position: fixed;
     top: 0;
+    overflow: hidden;
+    z-index: 11;
   }
 
     .navigation-bar{

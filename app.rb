@@ -66,18 +66,18 @@ get '/signout' do
     redirect '/'
 end
 
-get '/:username/useredit' do
+get '/users/:username/useredit' do
     erb :user_edit
 end
 
-post '/:username/useredit' do
+post '/users/:username/useredit' do
     user = User.find(session[:user])
     user.discription = params[:discription]
     user.save!
-    redirect '/:username'
+    redirect '/users/:username'
 end
 
-get '/:username' do
+get '/users/:username' do
     if current_user.nil?
         @posts = Post.none
     else
@@ -86,11 +86,11 @@ get '/:username' do
     erb :user_page
 end
 
-get '/:newpost' do
+get '/newpost' do
     erb :new_post
 end
 
-post '/:newpost' do
+post '/newpost' do
     current_user.posts.create(text: params[:text])
     redirect '/'
 end
@@ -104,9 +104,6 @@ post '/post/:id/delete' do
 end
 
 get '/mordal' do
+    @post = Post.find(params[:id])
     erb :mordal, :layout => false
-end
-
-get '/home' do
-    erb :aaa, :user_page => nil
 end
