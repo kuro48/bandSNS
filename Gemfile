@@ -24,3 +24,5 @@ end
 gem 'rack'
 
 gem 'pry'
+
+gem 'sanitize', '~> 4.0', '>= 4.0.1'

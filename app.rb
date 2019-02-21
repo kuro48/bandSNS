@@ -9,6 +9,7 @@ require 'pry'
 require './models'
 
 require 'bcrypt'
+require  'sanitize'
 # require "./show_table_action"
 
 enable :sessions

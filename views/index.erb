@@ -7,10 +7,11 @@
         <form action="/newpost" method="post">
           <div class="newpost">
             <div>
-              <input name="text" type="text" placeholder="今日は練習した？" class="new-form">
+              <textarea name="text" type="text" placeholder="今日は練習した？" class="new-form">
+              </textarea>
             </div>
             <div>
-              <input type="submit" value="投稿">
+              <input type="submit" value="投稿" class="newpost-btn">
             </div>
           </div>
         </form>
@@ -18,30 +19,31 @@
       <div class="post-scroll">
         <% @posts.each do |post| %>
           <div class="post">
-            <div class="post-user">
-              <div class="post-nickname">
-                <b>
-                  <a href="/users/<%= post.user.username %>">
+            <a href="/users/<%= post.user.username %>">
+              <div class="post-user">
+                <div class="post-nickname">
+                  <b>
                     <%= post.user.nickname %>
-                </b>
+                  </b>
+                </div>
+                <div>
+                  <p class="post-username">
+                    @<%= post.user.username %>
+                  </p>
+                </div>
               </div>
-              <div>
-                <b class="post-username">
-                  @<%= post.user.username %>
-                </b>
-              </div>
-            </div>
+            </a>
             <a class="mordal-post-open" data-id="<%= post.id %>">
               <div>
                 <p class="post-text">
-                  <%= post.text %>
+                  <%= post.text.gsub(/(\r\n|\r|\n)/,"<br />") %>
                 </p>
               </div>
             </a>
               <% if post.user_id == current_user.id %>
                 <div>
-                  <form action="/post/<%= post.id %>/delete" method="post">
-                    <input type="submit" value="削除">
+                  <form action="/post/<%= post.id %>/delete" method="post" class="delete">
+                    <input type="submit" value="削除" class="delete-btn">
                   </form>
                 </div>
               <% end %>
@@ -84,6 +86,7 @@
       font-family: "東青梅ゴシック";
       height: 100%;
       color: #4a4a4a;
+      font-size: 14px;
   }
 
   div {
@@ -95,6 +98,14 @@
   }
 
   input {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+  }
+
+  textarea {
     padding: 0;
     border: none;
     border-radius: 0;
@@ -118,7 +129,7 @@
     }
 
     .home-main {
-      flex: 2;
+      width: 560px;
     }
   }
 
@@ -145,6 +156,8 @@
 
   .newpost-box {
     height: 70px;
+    margin: 3px;
+    border-bottom: 1px solid rgba(74,74,74);
   }
 
   .newpost {
@@ -152,10 +165,35 @@
     left: 50%;
     transform: translate(-50%);
     width: 100%;
-    border-bottom: 1px solid rgba(74,74,74);
     height: 66px;
   }
 
+  .newpost-btn {
+    display: inline-block;
+    max-width: 50px;
+    text-align: left;
+    border: 1px solid #16c4fd;
+    font-size: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 6px;
+    border-radius: 30px;
+    transition: .4s;
+    background-color: #16c4fd;
+    height: auto;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+
+  .newpost-btn:hover {
+    background-color: #02A6D9;
+  }
+
+  .post {
+    margin: 2px;
+  }
 
   .post-user {
     height: 30px;
@@ -163,9 +201,45 @@
 
   .post-nickname {
     overflow: hidden;
+    font-weight: bold;
   }
 
   .post-username {
     float: left;
+    color: #657786;
+  }
+
+  .post-text {
+    word-break: break-all;
+    margin: 10px;
+  }
+
+  .delete {
+    position: relative;
+  }
+
+  .delete-btn {
+    display: inline-block;
+    max-width: 60px;
+    text-align: left;
+    border: 1px solid #CA1E04;
+    font-size: 12px;
+    color: #CA1E04;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: .4s;
+    background-color: #fff;
+    padding:4px 6px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: auto;
+  }
+
+  .delete-btn:hover {
+    background-color: #CA1E04;
+    border-color: #CA1E04;
+    color: #fff;
   }
 </style>
