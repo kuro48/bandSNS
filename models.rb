@@ -23,12 +23,12 @@ class User < ActiveRecord::Base
     uniqueness: true,
     presence: true
 
-    has_many :posts
+  has_many :posts
 end
 
 class Post < ActiveRecord::Base
   validates :text,
   presence: true
 
-  belongs_to :user
+  belongs_to :users
 end
