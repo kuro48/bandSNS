@@ -30,5 +30,5 @@ class Post < ActiveRecord::Base
   validates :text,
   presence: true
 
-  belongs_to :users
+  belongs_to :user
 end
