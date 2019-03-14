@@ -1,5 +1,17 @@
-  <div>
-    <li>アカウントを作成</li>
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136238031-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-136238031-1');
+</script>
+</head>
+<div class="signup-page">
+  <div class="signup-box">
+    <li class="signup">アカウントを作成しよう</li>
     <form action="/signup" method="post">
       <div>
         <div>
@@ -14,3 +26,56 @@
       </div>
     </form>
   </div>
+</div>
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      font-family: "東青梅ゴシック";
+      height: 100%;
+      color: #4a4a4a;
+    }
+
+  div {
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    background: none;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .signup-page{
+    background-color: #e6ecef;
+    height: 100%;
+  }
+
+  .signup-box{
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color:#fff;
+  }
+
+  .signup{
+    list-style: none;
+    height: auto;
+    text-align: center;
+  }
+  </style>
